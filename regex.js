@@ -40,7 +40,7 @@ let result5 = twinkleStar.match(starRegex)
 console.log(result5)
 // logs [ 'Twinkle', 'twinkle' ]
 
-// Wildcard Period 
+// Wildcard Period ('.' is wildcard!)
 // Can be added at the front or back /.um/ or /hu./
 let humStr = "I'll hum a song"
 let hugStr = "Bear hug"
@@ -108,3 +108,68 @@ console.log(result11)
 //   'm', 'n', 'c',
 //   '.'
 // ]
+
+// Match Characters that Occur one or more times 
+let difficultSpelling = "Mississipspi"
+let myRegex3 = /s+/g
+let result12 = difficultSpelling.match(myRegex3)
+console.log(result12)
+// logs ["ss", "ss", "s"]
+
+// Match Characters that Occur Zero or more times (*)
+let soccerWord = "gooooooal!"
+let gPhrase = "gut feeling"
+let oPhrase = "over the moon"
+// Match g than o (zero or more times)
+let goRegex = /go*/
+console.log(soccerWord.match(goRegex))
+// logs [ 'goooooo', index: 0, input: 'gooooooal!', groups: undefined ]
+console.log(gPhrase.match(goRegex))
+// logs [ 'g', index: 0, input: 'gut feeling', groups: undefined ]
+console.log(oPhrase.match(goRegex))
+// logs null
+
+// Find Characters with Lazy Matching
+// Greedy finds longest part of string that fits(default)
+// Lazy match finds smallest possible
+let string = "titanic"
+// finds t and 0 or more occurences of a-z than finds i at the end. (greedy)
+let greedRegex = /t[a-z]*i/;
+let lazyRegex = /t[a-z]*?i/
+console.log(string.match(greedRegex))
+// logs titani
+console.log(string.match(lazyRegex))
+// logs ti
+
+let text = "<h1>Winter is coming</h1>";
+// 0 or more occurences of dot (anything)
+let myRegex4 = /<.*>/
+let lazyMyRegex4 = /<.*?>/
+console.log(text.match(myRegex4))
+// logs <h1>Winter is coming</h1>
+console.log(text.match(lazyMyRegex4))
+// logs <h1>
+
+// Find One ore More Criminals in a Hunt
+// criminals represented by 'C'
+// + matches anytime there are one or more Cs
+let crowd = 'P1P2P3P4P5P6CCCP7P8P9'
+let reCriminals = /C+/
+// let reCriminals = /CC*/ig
+console.log(crowd.match(reCriminals))
+// logs ["CCC"]
+
+// Match Beginning String Patterns with '^'
+let rickyAndCal = "Cal and Ricky both like racing."
+// matches only if Cal is in the beginning of the string.
+let calRegex = /^Cal/
+console.log(calRegex.test(rickyAndCal))
+// logs true
+
+// Match Ending String Patterns with '$'
+let caboose = "The last ca on a train is the caboose"
+let lastRegex = /caboose$/
+console.log(lastRegex.test(caboose))
+// logs true
+
+// Match all letters and Numbers
