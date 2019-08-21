@@ -174,7 +174,7 @@ console.log(lastRegex.test(caboose))
 
 // Match all letters and Numbers
 let quoteSample5 = "The five boxing wizards jump quickly."
-// \w is a short hand to match the alphabet A-Z a-z 0-9 _
+// \w is a short hand to match the alphabet A-Z, a-z, 0-9, _
 let alphabetRegexV2 = /\w/g
 console.log(quoteSample5.match(alphabetRegexV2))
 // logs [
@@ -243,3 +243,77 @@ let timStr = "Timmmmber"
 let timRegex = /Tim{4}ber/
 console.log(timRegex.test(timStr))
 // logs true
+
+// Check for All or None
+// check possible existence of element with '?'
+let favWord = "favorite"
+// this is saying it may have a u or it may have not.
+let faveRegex = /favou?rite/
+console.log(faveRegex.test(favWord))
+// logs true
+
+// Positive and Negative look ahead
+// check for patterns ahead. 
+
+let quit = "qu"
+let noquit = "qt"
+// ?= positive look ahead ?! negative look ahead
+
+// check for q than look ahead to make sure there is a u later in the string/
+// Does not return u
+let quRegex = /q(?=u)/
+// check for q then look ahead that a u is not in the later string.
+let qRegex = /q(?!u)/
+quit.match(quRegex)
+// returns ["q"]
+noquit.match(qRegex)
+// returns ["q"]
+
+// check two or more patterns in one string.
+let sampleWord = "astronaut23"
+// match 5 or more characters than 2 or more digits
+let pwRegex = /(?=\w{5})(?=\D*\d{2})/
+console.log(pwRegex.test(sampleWord))
+// logs true
+
+// Reuse Patterns usince Capture Groups 
+let repeatStr = "regex regex"
+// create capture groups with parenthesis (\w+)
+// searching for any number of characters then a space than again (\1) 
+// below is equal to /(\w+)\s\(\w+)/
+let repeatRegex = /(\w+)\s\1/
+console.log(repeatRegex.test(repeatStr))
+// logs true
+console.log(repeatStr.match(repeatRegex))
+// second element is w.e is in the capture group
+// logs ["regex regex", "regex"]
+
+let repeatNum = "42 42 42"
+// find a number 3 times. want only a group of 3 numbers so add ^ and $
+let reRegex = /^(\d+)\s\1\s\1$/
+console.log(reRegex.test(repeatNum))
+// logs true
+
+// Use Capture groups to search and replace 
+let wrongText = "The sky is silver."
+let silverRegex = /silver/
+wrongText.replace(silverRegex, "blue")
+// returns "The sky is blue."
+
+// any number of letters space than any number of letters
+// $2 second capture group in the regex. $1 means first capture group
+// Can switch capture groups with replace.
+let reverse = "Code Camp".replace(/(\w+)\s(\w+)/, '$2 $1')
+console.log(reverse)
+// logs Camp Code
+
+let huhText = "This sandwich is good."
+let fixRegex = /good/
+let replaceText = "okey-dokey"
+console.log(huhText.replace(fixRegex, replaceText))
+// logs This sandwich is okey-dokey.
+
+// Remove whitespace from front and end 
+let hello = "    Hello, World!    "
+let wsRegex = /^\s+|\s+$/g
+console.log(hello.replace(wsRegex, ""))
