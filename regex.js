@@ -173,3 +173,73 @@ console.log(lastRegex.test(caboose))
 // logs true
 
 // Match all letters and Numbers
+let quoteSample5 = "The five boxing wizards jump quickly."
+// \w is a short hand to match the alphabet A-Z a-z 0-9 _
+let alphabetRegexV2 = /\w/g
+console.log(quoteSample5.match(alphabetRegexV2))
+// logs [
+//   'T', 'h', 'e', 'f',
+//   'i', 'v', 'e', 'b',
+//   'o', 'x', 'i', 'n',
+//   'g', 'w', 'i', 'z',
+//   'a', 'r', 'd', 's',
+//   'j', 'u', 'm', 'p',
+//   'q', 'u', 'i', 'c',
+//   'k', 'l', 'y'
+// ]
+
+// Match everything but letters and Numbers 
+// \W is the opposite of \w
+let nonAlphabetRegex = /\W/g
+console.log(quoteSample5.match(nonAlphabetRegex))
+// logs all the spaces
+
+// Match All Numbers or Digits
+// \d
+let numString = "Your sandwich will be $5.00"
+let numRegex = /\d/g
+console.log(numString.match(numRegex))
+// logs [ '5', '0', '0' ]
+// Non Numbers would be \D 
+
+// Restrict possible Usernames
+// numbers must be at the end
+// letters can be lowercase and uppercase 
+// at least 2 characters long, two letter names can't have numbers 
+let username = "JackOfAllTrades"
+// {2,} number of times previous thing can match {min, max}
+// \d* checks for digits any number of it
+// \d*$ makes sure it is at the end
+let userCheck = /^[A-Za-z]{2,}\d*$/
+console.log(userCheck.test(username))
+// logs true
+
+// Match whitespace 
+//  \s new line character space or tab. 
+let countWhiteSpace = /\s/g
+console.log(numString.match(countWhiteSpace))
+// logs [ ' ', ' ', ' ', ' ' ]
+
+// Match all non-whitespace characters 
+//  \S is the opposite 
+
+// Specify Upper and Lower Number of Matches
+// quantity specifiers {}
+let ohStr = "Ohhh no"
+// Always match letter O and h only match if in between 3-6 hs. then match no
+let ohRegex = /Oh{3,6} no/ 
+console.log(ohRegex.test(ohStr));
+// logs true
+
+// Specify only the lower number of matches 
+let haStr = "Hazzzzah"
+let haRegex = /z{4,}/
+console.log(haRegex.test(haStr))
+// logs true
+
+// Specify Exact Number of matches 
+let timStr = "Timmmmber"
+// without comma it is exactly 4
+let timRegex = /Tim{4}ber/
+console.log(timRegex.test(timStr))
+// logs true
